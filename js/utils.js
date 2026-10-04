@@ -4,8 +4,8 @@ import { userHandleInput }                                          from './elem
 
 export const getCurrentUser = () => userHandleInput.value.trim() || 'Anonymous'
 
-export const isCoPrAdmin          = (memberName) => memberName.includes('{{CoPrAdmin}}')
-export const getMemberDisplayName = (memberName) => memberName.replace('{{CoPrAdmin}}', '').trim()
+export const isCoPrAdmin          = (memberName) => memberName.includes('{{CPA}}')
+export const getMemberDisplayName = (memberName) => memberName.replace('{{CPA}}', '').trim()
 
 export const getInitials = (name) => {
   return (name.replace(/[^a-zA-Z0-9]/g, '').slice(0, 2) || 'CP').toUpperCase()
