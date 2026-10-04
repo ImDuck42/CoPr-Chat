@@ -1,0 +1,18 @@
+[
+  {
+    "date" : "2026-10-04",
+    "title": "Version 1.8",
+    "changes": [
+      "Open this panel from the CoPr Chat title to see the latest updates.",
+      "Added 420 prefix checks to not overwrite other users legit counters."
+    ]
+  },
+  {
+    "date" : "<2026-10-04",
+    "title": "Before version 1.8",
+    "changes": [
+      "Lotta Stuff."
+    ]
+  }
+
+]

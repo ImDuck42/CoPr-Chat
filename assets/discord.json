@@ -1,0 +1,36 @@
+{
+  "component": {
+    "type"        : 17,
+    "accent_color": 15357964,
+    "components"  : [
+      {
+        "type"      : 9,
+        "components": [ {
+            "type"    : 10,
+            "content": "# **[CoPr Chat](https://imduck42.github.io/CoPr-Chat/)**\nA chat platform running on [countapi.mileshilliard.com](https://countapi.mileshilliard.com)"
+          }
+        ],
+        "accessory":
+          {
+            "type" : 2,
+            "style": 5,
+            "url"  : "https://imduck42.github.io/CoPr-Chat/",
+            "label": "GH Pages",
+            "emoji": {
+              "name": "CoPr",
+              "id"  : "1556029563879039096"
+            }
+          }
+        },
+      {
+        "type" : 12,
+        "items": [ {
+          "media": {
+            "url": "https://imduck42.github.io/CoPr-Chat/assets/previews/preview.png"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CoPr Chat</title>
+    <meta name="description" content="A CountProtocol based Chatroom">
+    <meta name="theme-color" content="#ea580c">
+    <link rel="discord:component-embed" type="application/json" href="https://imduck42.github.io/CoPr-Chat/assets/discord.json">
+
+
+    <link rel="icon"       type="image/png" href="./assets/CoPr.png" sizes="any">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body>
+
+    <!-- Disclaimers Popup -->
+    <div id="termsModal" class="modal-overlay">
+      <div class="modal-card">
+        
+        <header class="modal-header">
+          <div class="modal-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <h2>CoPr Chat Disclaimers</h2>
+        </header>
+
+        <section class="modal-body">
+          <p>
+            <strong>Unmoderated:</strong>
+            Content is carried without censorship or filtering of any sort.
+          </p>
+          <p>
+            <strong>Channel Wiping:</strong>
+            Any user can clear, reset all room messages, or delete a room as a whole at any time.
+          </p>
+          <p>
+            <strong>File Uploads:</strong>
+            All files are temporarily uploaded to litterbox.catbox.moe and will be sent as links valid for only 24 hours. Don't upload anything illegal or Catbox will ban your IP.
+          </p>
+          <p>
+            <strong>Underlying Server Software:</strong>
+            The underlying server is countapi.mileshilliard.com. All data is sent as scrambled numbers. Anyone can convert them back into plain text, although unlikely and very hard without the source code.
+          </p>
+          <p>
+            <strong>Audio Notifications:</strong>
+            Clicking below grants permission to the Web Audio API for mentions and incoming messages.
+          </p>
+          <p>
+            <strong>Oh and you may be asked for Notification permissions for pings:</strong><br>
+            If your browser supports it or isnt surpressing it by default that is.
+          </p>
+        </section>
+
+        <button id="acceptTermsBtn" class="modal-btn">
+          <span>Acknowledge & Allow Audio</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        
+      </div>
+    </div>
+
+    <!-- Changelog Popup -->
+    <div id="changelogModal" class="modal-overlay" hidden>
+      <div class="modal-card changelog-card">
+        <header class="modal-header">
+          <div class="modal-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <h2 id="changelogTitle">What's new</h2>
+          <button id="closeChangelogBtn" class="changelog-close-btn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </header>
+        <section id="changelogContent" class="modal-body changelog-content">
+          <p class="changelog-state">Loading changes...</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="chat-app">
+
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+
+        <!-- Header -->
+        <header class="sidebar-brand">
+          <button id="changelogBtn" class="brand-trigger">
+            <span class="brand-badge">
+              <img src="./assets/CoPr.png" width="36" height="36">
+            </span>
+            <span class="brand-info">
+              <span class="brand-title">CoPr Chat</span>
+              <span class="brand-version">Version: ${dunno bro}</span>
+            </span>
+          </button>
+          <button id="toggleAudioBtn" class="mute-toggle active">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+        </header>
+
+        <!-- Join Channel -->
+        <section class="sidebar-join-strip">
+          <div class="join-input-group">
+            <div class="input-field-wrap">
+              <span class="hash-tag">#</span>
+              <input id="channelNameInput" placeholder="channel-name">
+            </div>
+            <button id="connectChannelBtn" class="primary-btn">Join</button>
+          </div>
+
+          <label class="checkbox-label" for="publicDiscoveryToggle">
+            <input id="publicDiscoveryToggle" type="checkbox">
+            <span class="checkmark"></span>
+            <span>Add to Public Channel-list</span>
+          </label>
+        </section>
+
+        <!-- Public Channels -->
+        <section class="sidebar-channels-section">
+          <div class="section-title-row">
+            <h2>Public Channels</h2>
+            <button id="refreshDiscoveryBtn" class="refresh-icon-btn">
+              <i class="fa-solid fa-rotate"></i>
+            </button>
+          </div>
+
+          <div class="channel-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="searchChannelsInput" placeholder="Search channels...">
+          </div>
+
+          <div id="discoveredRoomsContainer" class="channel-list">
+            <div class="empty-channels">
+              <i class="fa-solid fa-folder-open"></i>
+              <span>No public channels yet<br>Click sync or create one</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bottom Dock -->
+        <footer class="sidebar-user-dock">
+          <div id="userAvatarBadge" class="avatar">ME</div>
+          <div class="user-meta">
+            <span class="dock-label">Your Handle</span>
+            <div class="dock-handle-wrap">
+              <span class="at-sign">@</span>
+              <input id="userHandleInput" maxlength="27" placeholder="username">
+            </div>
+          </div>
+        </footer>
+
+      </aside>
+
+      <!-- Main Chat -->
+      <main class="main-chat">
+
+        <!-- Topbar -->
+        <header class="chat-topbar">
+          <div class="room-title-group">
+            <div class="room-hash">#</div>
+            <h2 id="currentRoomHeader">This ain't no chat</h2>
+          </div>
+
+          <div class="topbar-actions">
+            <div id="messageCounterBadge" class="message-counter" style="display: none;">
+              <i class="fa-regular fa-comments"></i>
+              <span id="messageCounterText">0</span>
+            </div>
+
+            <button id="copyRoomLinkBtn" class="secondary-btn" style="display: none;">
+              <i class="fa-regular fa-clone"></i>
+              <span>Copy</span>
+            </button>
+
+            <button id="toggleMembersBtn" class="secondary-btn">
+              <i class="fa-solid fa-users"></i>
+            </button>
+
+            <button id="leaveRoomBtn" class="ghost-btn" style="display: none;">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Message Feed -->
+        <section id="messageStreamFeed" class="chat-feed">
+          <div id="emptyStatePlaceholder" class="empty-feed-card">
+            <div class="empty-icon">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <h3>Welcome to CoPr</h3>
+            <p>
+              If you see this, messages are currently being loaded or you have yet to join a channel.
+              <br><br>
+              You can enter a channel name above to begin chatting or join a public one.
+            </p>
+          </div>
+        </section>
+
+        <!-- Message Area -->
+        <footer class="chat-bottom">
+          <div id="stagedFilesContainer" class="staged-files-tray" style="display: none;"></div>
+          <form class="input-container" onsubmit="return false;">
+            <textarea id="chatMessageInput" rows="1" placeholder="Select a channel to start chatting..." disabled></textarea>
+            
+            <input id="fileAttachmentInput" type="file" multiple style="display: none;">
+            
+            <button id="attachFileBtn" class="attach-btn" type="button" disabled>
+              <i class="fa-solid fa-paperclip"></i>
+            </button>
+            
+            <button id="sendMessageBtn" class="send-btn" type="button" disabled>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </footer>
+
+      </main>
+
+      <!-- Active Members -->
+      <aside id="membersSidebar" class="members-sidebar">
+        <header class="members-header">
+          <h2>Now Active</h2>
+          <span id="memberCountBadge" class="member-count-badge">0</span>
+        </header>
+
+        <div id="activeMembersList" class="members-list">
+          <div class="empty-members">
+            <i class="fa-solid fa-users-slash"></i>
+            <span>Not in an active channel</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

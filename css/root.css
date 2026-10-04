@@ -1,0 +1,78 @@
+:root {
+  --color-background-app:     #080a0f;
+  --color-background-sidebar: #121520;
+  --color-background-card:    #1a1e2c;
+  --color-background-input:   #0b0d13;
+  --color-background-hover:   #23293b;
+  --color-background-disable: #2b3247;
+
+  --color-copper-base:   #ea580c;
+  --color-copper-bright: #f97316;
+  --color-copper-glow:   #fb923c;
+  --color-copper-shadow: #9a3412;
+  --color-copper-alpha:  rgba(234, 88, 12, 0.18);
+
+  --color-text-primary: #f8fafc;
+  --color-text-muted:   #94a3b8;
+  --color-text-dimmed:  #64748b;
+  --color-text-white:   #ffffff;
+  --color-text-black:   #000000;
+
+  --color-status-success: #10b981;
+  --color-status-danger:  #ef4444;
+  --color-danger-alpha:   rgba(239, 68, 68, 0.10);
+  --color-danger-hover:   rgba(239, 68, 68, 0.18);
+  
+  --color-status-warning: #f59e0b;
+  --color-warning-alpha:  rgba(245, 158, 11, 0.10);
+  --color-warning-hover:  rgba(245, 158, 11, 0.18);
+
+  --color-link-base:    #38bdf8;
+  --color-link-hover:   #7dd3fc;
+  --color-brand-blue:   #3b82f6;
+  --color-shadow-black: #050608;
+
+  --color-border-alpha:  rgba(255, 255, 255, 0.07);
+  --color-avatar-alpha:  rgba(255, 255, 255, 0.15);
+  --color-overlay-alpha: rgba(0, 0, 0, 0.85);
+
+  --style-border-thick:   3px solid var(--color-background-disable);
+  --style-border-thin:    2px solid var(--color-border-alpha);
+  --style-border-avatar:  2px solid var(--color-avatar-alpha);
+  --style-border-focus:   2px solid var(--color-copper-base);
+  --style-border-danger:  2px solid var(--color-status-danger);
+  --style-border-warning: 2px solid var(--color-status-warning);
+
+  --font-family-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  --radius-size-4:  4px;
+  --radius-size-5:  5px;
+  --radius-size-6:  6px;
+  --radius-size-8:  8px;
+  --radius-size-9:  9px;
+  --radius-size-10: 10px;
+  --radius-size-12: 12px;
+  --radius-size-14: 14px;
+  --radius-size-16: 16px;
+  --radius-size-18: 18px;
+
+  --shadow-depth-one:   0 1px 0 var(--color-shadow-black);
+  --shadow-depth-two:   0 2px 0 var(--color-shadow-black);
+  --shadow-depth-three: 0 3px 0 var(--color-shadow-black);
+  --shadow-depth-four:  0 4px 0 var(--color-shadow-black);
+  --shadow-depth-five:  0 5px 0 var(--color-shadow-black);
+  --shadow-depth-six:   0 6px 0 var(--color-shadow-black);
+  --shadow-depth-eight: 0 8px 0 var(--color-shadow-black);
+
+  --shadow-copper-one:  0 1px 0 var(--color-copper-shadow);
+  --shadow-copper-two:  0 2px 0 var(--color-copper-shadow);
+  --shadow-copper-four: 0 4px 0 var(--color-copper-shadow);
+  --shadow-copper-five: 0 5px 0 var(--color-copper-shadow);
+
+  --animation-instant: 0.10s;
+  --animation-fast:    0.12s ease;
+  --animation-medium:  0.15s ease;
+  --animation-slow:    0.20s ease;
+  --animation-popin:   popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

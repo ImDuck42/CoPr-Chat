@@ -1,0 +1,33 @@
+.secondary-btn,
+.ghost-btn {
+  border:        var(--style-border-thick);
+  border-radius: var(--radius-size-9);
+  cursor:        pointer;
+  box-shadow:    var(--shadow-depth-four);
+  transition:    all var(--animation-fast);
+
+  &:active {
+    transform:  translateY(3px);
+    box-shadow: var(--shadow-depth-one);
+  }
+}
+
+.secondary-btn {
+  background: var(--color-background-card);
+  color:      var(--color-text-primary);
+
+  &:hover {
+    background: var(--color-background-hover);
+  }
+}
+
+.ghost-btn {
+  background: transparent;
+  color:      var(--color-text-muted);
+  box-shadow: none;
+
+  &:hover {
+    color:      var(--color-text-primary);
+    background: var(--color-background-card);
+  }
+}
