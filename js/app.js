@@ -185,7 +185,7 @@ const openChangelog = async () => {
   closeChangelogBtn.focus()
 
   try {
-    const response = await fetch('/assets/changes.json', { cache: 'no-store' })
+    const response = await fetch('./../assets/changes.json', { cache: 'no-store' })
     if (!response.ok) throw new Error(`Changelog request failed: ${response.status}`)
     renderChangelog(await response.json())
   } catch {
